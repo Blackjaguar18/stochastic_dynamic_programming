@@ -8,8 +8,8 @@ defmodule SDP.MiddleWorker do
   @doc """
   Callback defining how to the process is started and named.
   """
-  def child_spec(arg) do
-    %{id: :middle_worker, start: {SDP.MiddleWorker, :start_link, arg}}
+  def child_spec([name] = arg) do
+    %{id: name, start: {SDP.MiddleWorker, :start_link, arg}}
   end
 
   @doc """

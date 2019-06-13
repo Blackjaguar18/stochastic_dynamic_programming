@@ -5,9 +5,11 @@ defmodule SDP.Application do
     import Supervisor.Spec, warn: false
 
     children = [
-      {SDP.GlobalParameters, [GlobalParameters]},
+      {SDP.GlobalParameters, [:global]},
       {SDP.FirstWorker, [FirstWorker]},
-      {SDP.MiddleWorker, [MiddleWorker]},
+      {SDP.MiddleWorker, [SecondWorker]},
+      {SDP.MiddleWorker, [ThirdWorker]},
+      {SDP.MiddleWorker, [FourthWorker]},
       {SDP.LastWorker, [LastWorker]}
     ]
 
