@@ -62,7 +62,8 @@ defmodule SDP do
     stock_after_transformations = stock_after_transformations(x, z, k)
 
     if x_i >= stock_after_transformations - fetch(:upper_bound_uniform) and
-         x_i <= stock_after_transformations and x_i >= fetch(:min_x) and x_i <= fetch(:max_x) do
+         x_i <= stock_after_transformations - fetch(:lower_bound_uniform) and x_i >= fetch(:min_x) and
+         x_i <= fetch(:max_x) do
       1 / fetch(:total_number_of_values)
     else
       0
