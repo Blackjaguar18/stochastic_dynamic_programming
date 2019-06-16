@@ -222,16 +222,16 @@ defmodule SDP do
     Enum.reduce(values, [%{value: :init}], fn %{value: value} = values,
                                               [%{value: current_lowest} | _] = current ->
       cond do
-        value > current_lowest ->
-          current
-
-        value == current_lowest ->
-          [values | current]
-
-        value < current_lowest ->
+        current_lowest == :init ->
           [values]
 
-        current_lowest == :init ->
+        round(value) > round(current_lowest) ->
+          current
+
+        round(value) == round(current_lowest) ->
+          [values | current]
+
+        round(value) < round(current_lowest) ->
           [values]
       end
     end)
