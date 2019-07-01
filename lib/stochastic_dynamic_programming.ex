@@ -243,4 +243,40 @@ defmodule SDP do
   def fetch(parameter) when is_atom(parameter) do
     GenServer.call(:global, {:return_parameter, parameter})
   end
+
+  @doc """
+  Initiates the processes that represent the different periods in the model and returns
+  the state of the first period.
+  """
+  def init do
+    GenServer.call(
+      :global,
+      {:set_parameters,
+       %{
+         min_x: 0,
+         max_x: 40,
+         c1: 150,
+         c2: 100,
+         c3: 175,
+         c4: 200,
+         lower_bound_uniform: 1,
+         upper_bound_uniform: 10,
+         total_number_of_values: 10
+       }}
+    )
+
+    GenServer.call(E, :start, :infinity)
+    GenServer.call(D, {:start, E}, :infinity)
+    GenServer.call(C, {:start, D}, :infinity)
+    GenServer.call(B, {:start, C}, :infinity)
+    GenServer.call(A, {:start, B}, :infinity)
+    GenServer.call(A, :return_state)
+  end
+
+  @doc """
+  Returns the state of the provided period.
+  """
+  def get(name) do
+    GenServer.call(name, :return_state)
+  end
 end

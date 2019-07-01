@@ -6,11 +6,11 @@ defmodule SDP.Application do
 
     children = [
       {SDP.GlobalParameters, [:global]},
-      {SDP.FirstWorker, [FirstWorker]},
-      {SDP.MiddleWorker, [SecondWorker]},
-      {SDP.MiddleWorker, [ThirdWorker]},
-      {SDP.MiddleWorker, [FourthWorker]},
-      {SDP.LastWorker, [LastWorker]}
+      {SDP.FirstWorker, [A]},
+      {SDP.MiddleWorker, [B]},
+      {SDP.MiddleWorker, [C]},
+      {SDP.MiddleWorker, [D]},
+      {SDP.LastWorker, [E]}
     ]
 
     opts = [strategy: :one_for_one, name: SDP.Supervisor]
